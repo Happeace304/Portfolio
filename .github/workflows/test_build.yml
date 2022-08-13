@@ -1,0 +1,21 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: npm ci
+      - name: Check format
+        run: npm run format:ci
+      - name: Check lint
+        run: npm run lint:ci
+      - name: Build
+        run: npm run build
