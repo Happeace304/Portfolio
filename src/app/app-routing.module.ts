@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './modules/shell/main/main.component';
-import { ShellModule } from './modules/shell/shell.module';
 
 const ROUTES: Routes = [
   {
+    path: 'home',
+    loadChildren: () => import('./modules/shell/shell.module').then(({ ShellModule }) => ShellModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./modules/login/login.module').then(({ LoginModule }) => LoginModule)
+  },
+  {
     path: '',
-    component: MainComponent
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 ];
 
 @NgModule({
-  imports: [ShellModule, RouterModule.forRoot(ROUTES)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

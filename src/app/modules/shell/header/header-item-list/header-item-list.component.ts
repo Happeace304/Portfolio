@@ -16,6 +16,7 @@ export class HeaderItemListComponent implements OnInit {
       url: '#'
     }
   ];
+
   public constructor() {}
 
   ngOnInit(): void {}
