@@ -5,16 +5,8 @@ import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    HeaderComponent,
-    BodyComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    MainComponent,
-  ]
+  declarations: [MainComponent, HeaderComponent, BodyComponent],
+  imports: [CommonModule],
+  exports: [MainComponent]
 })
-export class ShellModule { }
+export class ShellModule {}
