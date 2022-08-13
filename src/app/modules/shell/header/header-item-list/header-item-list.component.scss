@@ -1,0 +1,22 @@
+@import 'paddings';
+@import 'borders';
+@import 'mixins';
+
+:host {
+  @include flex-container;
+}
+
+ul {
+  display: flex;
+  width: inherit;
+}
+
+li {
+  display: block;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-small;
+
+  &:hover {
+    background-color: #e8e9ef;
+  }
+}

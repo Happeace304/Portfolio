@@ -14,4 +14,4 @@ const ROUTES: Routes = [
   imports: [ShellModule, RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
-export class RoutingAppModule {}
+export class AppRoutingModule {}

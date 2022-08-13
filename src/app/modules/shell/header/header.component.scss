@@ -1,7 +1,11 @@
-@import 'src/assets/padding';
+@import 'paddings';
+@import 'borders';
+@import 'mixins';
+@import 'shadows';
 
 :host {
-  border: 1px solid red;
   display: flex;
-  padding: $spacing-s $spacing-m;
+  border: $border-primary;
+  padding: $spacing-sm $spacing-md;
+  box-shadow: $shadow-light;
 }
