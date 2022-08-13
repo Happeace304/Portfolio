@@ -1,3 +1,5 @@
 export function appInitializingFactory(): () => void {
-  return () => {};
+  return () => {
+    //NOOP
+  };
 }
