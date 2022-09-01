@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MainComponent } from './main/main.component';
+import { ShellComponent } from './shell-container/shell.component';
 
 const ROUTES: Routes = [
   {
     path: '',
-    component: MainComponent,
+    component: ShellComponent,
     children: [
       {
         path: '',
-        loadChildren: () => import('../home/home.module').then(({ HomeModule }) => HomeModule),
+        loadChildren: () => import('../main/main.module').then(({ MainModule }) => MainModule),
         pathMatch: 'full'
       }
     ]
