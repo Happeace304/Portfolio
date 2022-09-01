@@ -1,0 +1,22 @@
+@use 'spacings'
+@use 'borders'
+@use 'mixins'
+
+\:host
+  @include mixins.flex-container
+
+
+ul 
+  display: flex
+  width: inherit
+
+
+li 
+  display: block
+  padding: spacings.$xxs spacings.$md
+  border-radius: borders.$radius-small
+
+  &:hover 
+    background-color: #e8e9ef
+  
+

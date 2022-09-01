@@ -1,0 +1,22 @@
+@use "sass:math"
+@use "sass:map"
+@use "responsive"
+@use "../grid-layout" as gridLayout
+
+\:host
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  width: 100%
+
+  @mixin row($name)
+    gap: gridLayout.$gutter
+
+  @include responsive.media-down('sm')
+    @include row('xs')
+
+  @include responsive.media-between('sm', 'md')
+    @include row('sm')
+
+  @include responsive.media-up('md')
+    @include row('md')
