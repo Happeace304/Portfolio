@@ -1,0 +1,5 @@
+<input [ngModel]="value" (ngModelChange)="updateValue($event)" />
+<label>
+  <span class="required">{{ required ? '*' : '' }}</span>
+  {{ fieldName }}
+</label>

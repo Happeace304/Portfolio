@@ -1,0 +1,54 @@
+@use "spacings"
+@use "font"
+@use "generic"
+@use "borders"
+@use "mixins"
+
+\:host
+  $border-color: #5D6584
+
+  position: relative
+
+  label
+    position: absolute
+    background-color: white
+    top: 0
+    left: spacings.$xs
+    transition: transform 50ms ease-out
+    font-size: font.$size-xs
+    pointer-events: none
+
+    .required
+      color: generic.$danger
+
+  input
+    @include mixins.border($border-color)
+
+    padding: spacings.$xxs spacings.$xs
+    width: 100%
+    border-radius: borders.$radius-medium
+    font-size: font.$size-xs
+    line-height: font.$line-height
+
+    &:hover
+      cursor: pointer
+
+  @mixin status($color)
+    input
+      @include mixins.border($color)
+
+    label
+      color: $color
+
+  &.ng-touched
+    &.ng-invalid
+     @include status(generic.$danger)
+
+    &.ng-valid
+      @include status(generic.$accent)
+
+  &.focused, &.valued
+    label
+      transform: translateY(-1 * spacings.$xs)
+      font-size: font.$size-xxs
+
