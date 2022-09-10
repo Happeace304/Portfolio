@@ -10,8 +10,18 @@
       </app-column>
     </app-row>
     <app-row>
-      <app-column>
+      <app-column xsSpan="6" smSpan="6" mdSpan="6">
         <app-text-input formControlName="email" fieldName="Email"></app-text-input>
+      </app-column>
+    </app-row>
+    <app-row>
+      <app-column xsSpan="6" smSpan="6" mdSpan="6">
+        <app-phone-input
+          formControlName="phone"
+          fieldName="Phone"
+          [mask]="phonePattern"
+          [prefix]="phonePrefix"
+        ></app-phone-input>
       </app-column>
     </app-row>
   </fieldset>

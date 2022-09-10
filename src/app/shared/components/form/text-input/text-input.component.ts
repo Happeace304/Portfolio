@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BaseInputComponentAbstraction } from '../../../bases/base-input.component.abstraction';
@@ -17,7 +17,7 @@ import { BaseInputComponentAbstraction } from '../../../bases/base-input.compone
   ]
 })
 export class TextInputComponent extends BaseInputComponentAbstraction<string> {
-  constructor() {
-    super();
+  constructor(protected override changeDetector: ChangeDetectorRef) {
+    super(changeDetector);
   }
 }

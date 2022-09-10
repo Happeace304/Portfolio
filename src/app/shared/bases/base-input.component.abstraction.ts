@@ -1,5 +1,5 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, HostBinding, HostListener, Input } from '@angular/core';
+import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
@@ -34,6 +34,8 @@ export abstract class BaseInputComponentAbstraction<T> implements ControlValueAc
     this._isFocused = false;
   }
 
+  protected constructor(protected changeDetector: ChangeDetectorRef) {}
+
   public get value(): T {
     return this._value;
   }
@@ -57,5 +59,6 @@ export abstract class BaseInputComponentAbstraction<T> implements ControlValueAc
 
   public writeValue(value: T): void {
     this._value = value;
+    this.changeDetector.detectChanges();
   }
 }
