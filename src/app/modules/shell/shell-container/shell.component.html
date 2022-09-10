@@ -1,4 +1,12 @@
 <app-header></app-header>
 <main>
-  <router-outlet></router-outlet>
+  <app-grid-container type="centered">
+    <app-row>
+      <app-column>
+        <app-card>
+          <router-outlet></router-outlet>
+        </app-card>
+      </app-column>
+    </app-row>
+  </app-grid-container>
 </main>

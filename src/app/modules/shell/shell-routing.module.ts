@@ -10,8 +10,7 @@ const ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('../main/main.module').then(({ MainModule }) => MainModule),
-        pathMatch: 'full'
+        loadChildren: () => import('../main/main.module').then(({ MainModule }) => MainModule)
       }
     ]
   }
