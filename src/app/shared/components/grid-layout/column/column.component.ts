@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, HostBinding, Input, Optional } from '@angular/core';
 
-import { ScreenSizeModel } from './models/screen-size.model';
-import { SpanModel } from './models/span.model';
-import { XsSpanModel } from './models/xs-span.model';
+import { RowComponent } from '../row/row.component';
+import { ScreenSizeModel } from './screen-size.model';
+import { SpanModel } from './span.model';
 
 @Component({
   selector: 'app-column',
@@ -10,25 +10,19 @@ import { XsSpanModel } from './models/xs-span.model';
   styleUrls: ['./column.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColumnComponent implements OnChanges {
-  private _cssClasses = '';
-
-  @Input() public mdSpan!: SpanModel;
-  @Input() public smSpan!: SpanModel;
-  @Input() public xsSpan!: XsSpanModel;
+export class ColumnComponent {
+  @Input() public mdSpan: SpanModel = '12';
+  @Input() public smSpan: SpanModel = '12';
+  @Input() public xsSpan: SpanModel = '12';
 
   @HostBinding('attr.class') get classes(): string {
-    return this._cssClasses;
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes) {
-      this._cssClasses = this.getCssClasses();
-    }
-  }
-
-  private getCssClasses(): string {
     return [this.getXsSpanClass(), this.getSmSpanClass(), this.getMdSpanClass()].join(' ');
+  }
+
+  public constructor(@Optional() @Host() private rowComponent: RowComponent) {
+    if (!rowComponent) {
+      throw new Error('A colonial-column must have a colonial-row as parent');
+    }
   }
 
   private getMdSpanClass(): string {
@@ -43,11 +37,7 @@ export class ColumnComponent implements OnChanges {
     return this.getSpanClass('xs', this.xsSpan);
   }
 
-  private getSpanClass(type: ScreenSizeModel, span: number): string {
-    if (!span) {
-      throw new Error(`Please provide span for ${type.toUpperCase()} type`);
-    }
-
+  private getSpanClass(type: ScreenSizeModel, span: SpanModel): string {
     return `col-${type}-${span}`;
   }
 }

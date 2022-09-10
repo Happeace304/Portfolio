@@ -1,22 +1,29 @@
-@use "sass:math"
 @use "sass:map"
 @use "responsive"
+@use "spacings"
 @use "../grid-layout" as gridLayout
 
 \:host
-  display: flex
-  flex-wrap: wrap
-  flex-direction: row
-  width: 100%
+  display: grid
 
-  @mixin row($name)
-    gap: gridLayout.$gutter
+  @mixin row($size,  $type)
+    $span: 12
+
+    margin: spacings.$xs 0
+
+    &.#{$type}
+      grid-column-end: span $span
+      grid-template-columns: repeat($span, 1fr)
+      gap: map.get(map.get(gridLayout.$gutter-map, $type), $size)
 
   @include responsive.media-down('sm')
-    @include row('xs')
+    @include row('xs', 'stretch')
+    @include row('xs', 'centered')
 
   @include responsive.media-between('sm', 'md')
-    @include row('sm')
+    @include row('sm', 'stretch')
+    @include row('sm', 'centered')
 
   @include responsive.media-up('md')
-    @include row('md')
+    @include row('md', 'stretch')
+    @include row('md', 'centered')

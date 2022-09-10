@@ -1,29 +1,17 @@
-@use "sass:math"
 @use "sass:map"
 @use "responsive"
-@use "../grid-layout" as gridLayout
 
 \:host
-  $spanMap: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-  $xsSpanMap: 1, 2, 3, 4
-  $gutter: 24px
-  
-  @mixin column($name, $span, $totalSpan: 12)
-    &.col-#{$name}-#{$span}
-      $percent: math.div($span,$totalSpan)*100%
-      $gutter: gridLayout.$gutter
-      $gutterCompensation: math.div($gutter,$totalSpan) * $span
-
-      width: calc(#{$percent} - #{$gutter - $gutterCompensation})
+  @mixin column($size)
+    @for $span from 1 through 12
+      &.col-#{$size}-#{$span}
+        grid-column-end: span $span
 
   @include responsive.media-down('sm')
-    @each $span in $xsSpanMap
-      @include column('xs', $span, 4)
+    @include column('xs')
 
   @include responsive.media-between('sm', 'md')
-    @each $span in $spanMap
-      @include column('sm', $span)
+    @include column('sm')
 
   @include responsive.media-up('md')
-    @each $span in $spanMap
-      @include column('md', $span)
+    @include column('md')

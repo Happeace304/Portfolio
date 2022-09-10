@@ -1,20 +1,32 @@
 @use "sass:map"
 @use "responsive"
+@use "../grid-layout" as gridLayout
 
 \:host
-  $marginMap: ('xs': 24px, 'sm': 60px, 'md': 78px)
+  $horizontal-margin: 24px
 
-  display: flex
-  flex-direction: column
+  display: grid
 
-  @mixin container($name)
-    margin: 0 map.get($marginMap, $name)
+  @mixin container($size, $type)
+    &.#{$type}
+      $span: 12
+
+      grid-template-columns: repeat($span, 1fr)
+
+      @if (($type == 'stretch') or ($size == 'xs'))
+        margin: 0 $horizontal-margin
+      @else
+        width: map.get(map.get(gridLayout.$gutter-map, $type), $size) * ($span - 1) + map.get(gridLayout.$width-map, $size) * $span
+        margin: auto
 
   @include responsive.media-down('sm')
-    @include container('xs')
+    @include container('xs', 'stretch')
+    @include container('xs', 'centered')
 
   @include responsive.media-between('sm','md')
-    @include container('sm')
+    @include container('sm', 'stretch')
+    @include container('sm', 'centered')
 
   @include responsive.media-up('md')
-    @include container('md')
+    @include container('md', 'stretch')
+    @include container('md', 'centered')
